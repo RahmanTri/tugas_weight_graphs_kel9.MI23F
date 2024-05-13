@@ -105,4 +105,57 @@ class Peta:
                 print("  Akses ke kota lain:")
                 # dan iterasi list jalan yang ada pada kota dan print jalan aksesnya serta jaraknya
                 for jalan, jarak in self.daftarkota[kota].items():
+                    print("  *", jalan, "->", jarak, "KM")
+            # dan jika list kosong, maka print :
+            else:
+                print("  Tidak memiliki akses ke kota lain")
 
+
+
+# membuat list peta
+PetaJepang = Peta()
+
+# tambahkan kota
+PetaJepang.tambahkanKota("Ueno")
+PetaJepang.tambahkanKota("Shimonita")
+PetaJepang.tambahkanKota("Annaka")
+PetaJepang.tambahkanKota("Takasaki")
+PetaJepang.tambahkanKota("Ogano")
+PetaJepang.tambahkanKota("Chichibu")
+PetaJepang.tambahkanKota("Minano")
+PetaJepang.tambahkanKota("Nagatoro")
+PetaJepang.tambahkanKota("Yorii")
+PetaJepang.tambahkanKota("Honjo")
+PetaJepang.tambahkanKota("Isesaki")
+PetaJepang.tambahkanKota("Maebashi")
+
+# tambahkan jalan
+PetaJepang.tambahkanJalan("Shimonita","Annaka",21)
+PetaJepang.tambahkanJalan("Shimonita","Ueno",141)
+PetaJepang.tambahkanJalan("Ueno","Ogano",115)
+PetaJepang.tambahkanJalan("Ogano","Nagatoro",17)
+PetaJepang.tambahkanJalan("Ogano","Minano",13)
+PetaJepang.tambahkanJalan("Ogano","Chichibu",13)
+PetaJepang.tambahkanJalan("Chichibu","Minano",10)
+PetaJepang.tambahkanJalan("Chichibu","Yorii",21)
+PetaJepang.tambahkanJalan("Minano","Nagatoro",81)
+PetaJepang.tambahkanJalan("Minano","Yorii",74)
+PetaJepang.tambahkanJalan("Nagatoro","Yorii",11)
+PetaJepang.tambahkanJalan("Nagatoro","Honjo",26)
+PetaJepang.tambahkanJalan("Nagatoro","Takasaki",34)
+PetaJepang.tambahkanJalan("Takasaki","Annaka",12)
+PetaJepang.tambahkanJalan("Takasaki","Maebashi",11)
+PetaJepang.tambahkanJalan("Takasaki","Isesaki",20)
+PetaJepang.tambahkanJalan("Takasaki","Honjo",21)
+PetaJepang.tambahkanJalan("Honjo","Maebashi",32)
+PetaJepang.tambahkanJalan("Honjo","Isesaki",8)
+PetaJepang.tambahkanJalan("Isesaki","Maebashi",16)
+
+# untuk print hasil program
+PetaJepang.print_daftar_kota()
+print("===============================")
+# untuk print jarak kota-kota yang ada pada program terhadap kota honjo
+jarak_kota = PetaJepang.djikstra("Honjo")
+print("jarak kota Honjo ke kota lainnya adalah :")
+for kota, jarak in jarak_kota.items():
+    print(kota, "->", jarak, "KM")
