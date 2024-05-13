@@ -51,5 +51,58 @@ class Peta:
 
    # membuat algoritma  djikstra 
 #untuk mencari kota tedekat dan menghitung jarak antar kota
+ distance = {}
+        # melakukan looping pada daftar kota
+        for kota in self.daftarkota:
+            # memasukkan hasil looping ke  variabel kota dan dgn nilai infinite
+            distance[kota] = float('inf')
+        # men set agar jarak ke kota asal adalah o
+        distance[source] = 0
+    
+        # membuat variiabel kota mula
+        kota_mula = []
+        # melakukan looping untuk memasukkan nama kota ke list kota mula
+        for kota in self.daftarkota:
+            kota_mula.append(kota)
+        
+        # melakukan looping selama kota mula masih ada isinya
+        while kota_mula:
+            # buat variabel jarak minimum
+            min_distance = float('inf')
+            # buat variabel kota terdekat
+            kota_terdekat = None
+            
+            # melakukan looping pada kota mula
+            for kota in kota_mula:
+                # jika ditemukan kota dengan jarak kota lebih kecil daripada min distances
+                if distance[kota] < min_distance:
+                # maka closest kota dirubah ke kota tersebut
+                    min_distance = distance[kota]
+                    kota_terdekat = kota
+            
+            # menghapus kota yang telah ketemu pada kota mula agar tdk di terbaca berulang
+            kota_mula.remove(kota_terdekat)
+            
+            #perbarui nilai jarak dari semua vertex yang berdekatan
+            for neighbor, jarak in self.daftarkota[kota_terdekat].items():
+                # Ini menghitung total jarak dari kota asal ke tetangga melalui kota_terdekat.
+                Neighbor_distance = distance[kota_terdekat] + jarak
+                # Memeriksa apakah jarak baru yang dihitung lebih pendek dari jarak yang telah tercatat sebelumnya untuk tetangga tersebut.
+                if Neighbor_distance < distance[neighbor]:
+                    distance[neighbor] = Neighbor_distance
+        return distance
 
+    # membuat fungsi untuk mengeprint daftar kota dan kota yang memiliki akses jalan ke kota lain
+    def print_daftar_kota(self):
+        print('Berikut merupakan daftar kota yang terdaftar pada sistem peta:')
+        # melakukan iterasi pada daftarkota untuk mendapatkan daftar kota yang telah terdaftar
+        for kota in self.daftarkota:
+            # print nama kota
+            print("-", kota)
+            # cek apakah list jalan kota kosong atau tidak
+            if self.daftarkota[kota]:
+                # jika list jalan terdapat nama kota, maka print :
+                print("  Akses ke kota lain:")
+                # dan iterasi list jalan yang ada pada kota dan print jalan aksesnya serta jaraknya
+                for jalan, jarak in self.daftarkota[kota].items():
 
